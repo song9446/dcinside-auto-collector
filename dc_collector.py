@@ -10,7 +10,6 @@ def start(board_id="programming", author="", callback=print, last_doc_id=None, i
         for doc in docs:
             last_doc_id = doc["id"]
             for _author in author.split("|"):
-                print(_author, doc["author"])
                 if _author in doc["author"] and doc["author"].split("(")[0] == _author.split("(")[0]:
                     callback(doc)
                     break
