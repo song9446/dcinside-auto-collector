@@ -1,7 +1,6 @@
 import dc_api
 import time
-INTERVAL = 600
-def start(board_id="programming", author="", callback=print, last_doc_id=None):
+def start(board_id="programming", author="", callback=print, last_doc_id=None, interval=600):
     if last_doc_id is None:
         for doc in dc_api.board(board_id, num=1):
             last_doc_id = int(doc["id"])
@@ -11,10 +10,11 @@ def start(board_id="programming", author="", callback=print, last_doc_id=None):
         for doc in docs:
             last_doc_id = doc["id"]
             for _author in author.split("|"):
+                print(_author, doc["author"])
                 if _author in doc["author"] and doc["author"].split("(")[0] == _author.split("(")[0]:
                     callback(doc)
                     break
-        time.sleep(INTERVAL)
+        time.sleep(interval)
 
 if __name__ == "__main__":
     # 프로그래밍 갤러리 점진적자살 게시글 수집
